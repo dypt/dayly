@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f4f1ea" />
+    <meta name="description" content="A calm, offline-first habit tracker." />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>dayly</title>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="toolbar">
+        <button class="icon-button" type="button" data-menu-button aria-label="Open menu" aria-expanded="false" aria-controls="app-menu">
+          <span aria-hidden="true" class="burger"><span></span><span></span><span></span></span>
+        </button>
+        <div class="toolbar-heading">
+          <p class="eyebrow">dayly</p>
+          <h1>Today</h1>
+        </div>
+        <div class="toolbar-status" aria-label="No habits scheduled">
+          <span class="status-ring" aria-hidden="true"></span>
+          <span>0/0</span>
+        </div>
+      </header>
+
+      <nav class="app-menu" id="app-menu" data-menu hidden aria-label="Application menu">
+        <div class="menu-heading">
+          <span>Menu</span>
+          <span class="menu-version" data-menu-version></span>
+        </div>
+        <p class="update-notice" data-update-notice hidden>New version available. It will install on next launch.</p>
+        <button type="button" disabled>Import</button>
+        <button type="button" disabled>Export</button>
+        <button type="button" disabled>Settings</button>
+      </nav>
+
+      <section class="empty-state" aria-labelledby="empty-title">
+        <h2 id="empty-title">No habits yet</h2>
+        <p>Your day overview will live here.</p>
+        <button class="primary-button" type="button" disabled>Add habit</button>
+      </section>
+    </main>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
