@@ -1,4 +1,4 @@
-const CACHE_NAME = "dayly-app-v1";
+const CACHE_NAME = "dayly-app-__APP_VERSION__";
 const APP_SHELL = [
   "./",
   "./index.html",

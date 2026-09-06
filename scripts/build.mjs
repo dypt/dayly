@@ -32,8 +32,11 @@ execFileSync("npx", ["tsc", "--project", "tsconfig.json"], {
 
 await cp(join(root, "public"), dist, { recursive: true });
 
-const appPath = join(dist, "app.js");
-const app = await readFile(appPath, "utf8");
-await writeFile(appPath, app.replaceAll("__APP_VERSION__", getVersion()));
+const version = getVersion();
+for (const fileName of ["app.js", "sw.js"]) {
+  const filePath = join(dist, fileName);
+  const source = await readFile(filePath, "utf8");
+  await writeFile(filePath, source.replaceAll("__APP_VERSION__", version));
+}
 
-console.log(`Built ${getVersion()} to dist/`);
+console.log(`Built ${version} to dist/`);
