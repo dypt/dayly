@@ -122,6 +122,13 @@ function habitRow(habit: TodayHabit): HTMLElement {
     content.append(notes);
   }
 
+  if (habit.completed && habit.completedAt) {
+    const completion = document.createElement("p");
+    completion.className = "habit-completion";
+    completion.textContent = formatCompletionTime(habit.completedAt, today);
+    content.append(completion);
+  }
+
   row.append(checkbox, content);
   return row;
 }
