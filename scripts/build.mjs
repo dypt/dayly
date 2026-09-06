@@ -18,6 +18,10 @@ function getVersion() {
   }
 }
 
+if (git("status", "--porcelain")) {
+  throw new Error("Build requires a clean Git working tree.");
+}
+
 await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });
 
