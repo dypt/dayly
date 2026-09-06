@@ -1,11 +1,12 @@
-import { localDateToday } from "./date.js";
+import { formatCompletionTime, formatDayName, localDateToday } from "./date.js";
 import { openDaylyDatabase } from "./storage/database.js";
 import { createDailyHabit, getHabitsForDate, setHabitCompleted } from "./storage/repository.js";
-const APP_VERSION = "v0.1.2-0-g3648b09";
+const APP_VERSION = "v0.1.2-2-gddd4fa4";
 const today = localDateToday();
 const menuButton = document.querySelector("[data-menu-button]");
 const menu = document.querySelector("[data-menu]");
 const menuVersion = document.querySelector("[data-menu-version]");
+const dayName = document.querySelector("[data-day-name]");
 const updateNotice = document.querySelector("[data-update-notice]");
 const dayView = document.querySelector("[data-day-view]");
 const habitList = document.querySelector("[data-habit-list]");
@@ -16,7 +17,7 @@ const habitFormPage = document.querySelector("[data-habit-form-page]");
 const habitForm = document.querySelector("[data-habit-form]");
 const formError = document.querySelector("[data-form-error]");
 const storageError = document.querySelector("[data-storage-error]");
-if (!menuButton || !menu || !menuVersion || !updateNotice || !dayView || !habitList || !emptyState
+if (!menuButton || !menu || !menuVersion || !dayName || !updateNotice || !dayView || !habitList || !emptyState
     || !status || !statusCount || !habitFormPage || !habitForm || !formError || !storageError) {
     throw new Error("The application shell is missing required elements.");
 }
@@ -34,6 +35,7 @@ const errorPanel = formError;
 const storageErrorPanel = storageError;
 let database;
 menuVersion.textContent = APP_VERSION;
+dayName.textContent = formatDayName(today);
 function showUpdateNotice() {
     updatePanel.hidden = false;
 }
@@ -95,6 +97,12 @@ function habitRow(habit) {
         notes.className = "habit-notes";
         notes.textContent = habit.notes;
         content.append(notes);
+    }
+    if (habit.completed && habit.completedAt) {
+        const completion = document.createElement("p");
+        completion.className = "habit-completion";
+        completion.textContent = formatCompletionTime(habit.completedAt, today);
+        content.append(completion);
     }
     row.append(checkbox, content);
     return row;

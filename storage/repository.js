@@ -16,7 +16,7 @@ export async function getHabitsForDate(database, localDate) {
         listCompletionsForDate(database, localDate),
         listOrderSnapshots(database)
     ]);
-    const completedIds = new Set(completions.map((completion) => completion.habitVersionId));
+    const completionsByHabit = new Map(completions.map((completion) => [completion.habitVersionId, completion]));
     const order = todayOrder(snapshots, localDate);
     const orderIndex = new Map(order.map((id, index) => [id, index]));
     return habits
@@ -26,7 +26,11 @@ export async function getHabitsForDate(database, localDate) {
         const rightIndex = orderIndex.get(right.id) ?? Number.MAX_SAFE_INTEGER;
         return leftIndex - rightIndex || left.createdAt.localeCompare(right.createdAt);
     })
-        .map((habit) => ({ ...habit, completed: completedIds.has(habit.id) }));
+        .map((habit) => ({
+        ...habit,
+        completed: completionsByHabit.has(habit.id),
+        completedAt: completionsByHabit.get(habit.id)?.completedAt
+    }));
 }
 export async function createDailyHabit(database, input) {
     const now = new Date().toISOString();
