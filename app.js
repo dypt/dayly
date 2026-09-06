@@ -1,7 +1,7 @@
 import { formatCompletionTime, formatDayName, localDateToday } from "./date.js";
 import { openDaylyDatabase } from "./storage/database.js";
 import { createDailyHabit, getHabitsForDate, setHabitCompleted } from "./storage/repository.js";
-const APP_VERSION = "v0.1.2-2-gddd4fa4";
+const APP_VERSION = "v0.1.3-0-gddd4fa4";
 const today = localDateToday();
 const menuButton = document.querySelector("[data-menu-button]");
 const menu = document.querySelector("[data-menu]");
