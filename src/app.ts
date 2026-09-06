@@ -11,10 +11,11 @@ if (!menuButton || !menu || !menuVersion || !updateNotice) {
 
 const button = menuButton;
 const menuPanel = menu;
+const updatePanel = updateNotice;
 menuVersion.textContent = APP_VERSION;
 
 function showUpdateNotice() {
-  updateNotice.hidden = false;
+  updatePanel.hidden = false;
 }
 
 function setMenuOpen(isOpen: boolean) {
