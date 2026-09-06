@@ -1,5 +1,5 @@
 "use strict";
-const APP_VERSION = "v0.1.0-6-g49942eb";
+const APP_VERSION = "v0.1.1-1-g29e2723";
 const menuButton = document.querySelector("[data-menu-button]");
 const menu = document.querySelector("[data-menu]");
 const menuVersion = document.querySelector("[data-menu-version]");
