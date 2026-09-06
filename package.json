@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "dev": "node scripts/dev.mjs",
+    "dev": "http-server dist -p 4173 -c-1",
     "test": "node --test"
   },
   "devDependencies": {
+    "http-server": "^14.1.1",
     "typescript": "^5.9.2"
   },
   "dependencies": {
