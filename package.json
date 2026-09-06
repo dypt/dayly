@@ -6,6 +6,7 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "dev": "http-server dist -p 4173 -c-1",
+    "deploy": "node scripts/deploy.mjs",
     "test": "node --test"
   },
   "devDependencies": {
