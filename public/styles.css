@@ -79,6 +79,12 @@ button {
   text-transform: uppercase;
 }
 
+.day-context {
+  margin: 0.15rem 0 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
 h1,
 h2,
 p {
@@ -219,6 +225,12 @@ h1 {
   color: var(--muted);
   font-size: 0.9rem;
   white-space: pre-wrap;
+}
+
+.habit-completion {
+  margin: 0.5rem 0 0;
+  color: var(--accent);
+  font-size: 0.8rem;
 }
 
 .habit-row.is-completed .habit-title {

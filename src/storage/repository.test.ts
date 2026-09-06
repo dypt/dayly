@@ -36,6 +36,7 @@ test("creates a daily habit and persists completion state", async () => {
   await setHabitCompleted(database, habit.id, "2026-09-06", true);
   habits = await getHabitsForDate(database, "2026-09-06");
   assert.equal(habits[0]?.completed, true);
+  assert.match(habits[0]?.completedAt ?? "", /^\d{4}-\d{2}-\d{2}T/);
 
   await setHabitCompleted(database, habit.id, "2026-09-06", false);
   habits = await getHabitsForDate(database, "2026-09-06");

@@ -12,6 +12,7 @@ import type { Completion, HabitVersion, LocalDate } from "./types.js";
 
 export type TodayHabit = HabitVersion & {
   completed: boolean;
+  completedAt?: string;
 };
 
 function isScheduledOn(habit: HabitVersion, localDate: LocalDate): boolean {
@@ -36,7 +37,9 @@ export async function getHabitsForDate(
     listCompletionsForDate(database, localDate),
     listOrderSnapshots(database)
   ]);
-  const completedIds = new Set(completions.map((completion) => completion.habitVersionId));
+  const completionsByHabit = new Map(
+    completions.map((completion) => [completion.habitVersionId, completion])
+  );
   const order = todayOrder(snapshots, localDate);
   const orderIndex = new Map(order.map((id, index) => [id, index]));
 
@@ -47,7 +50,11 @@ export async function getHabitsForDate(
       const rightIndex = orderIndex.get(right.id) ?? Number.MAX_SAFE_INTEGER;
       return leftIndex - rightIndex || left.createdAt.localeCompare(right.createdAt);
     })
-    .map((habit) => ({ ...habit, completed: completedIds.has(habit.id) }));
+    .map((habit) => ({
+      ...habit,
+      completed: completionsByHabit.has(habit.id),
+      completedAt: completionsByHabit.get(habit.id)?.completedAt
+    }));
 }
 
 export async function createDailyHabit(

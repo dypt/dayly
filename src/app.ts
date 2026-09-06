@@ -1,4 +1,4 @@
-import { localDateToday } from "./date.js";
+import { formatCompletionTime, formatDayName, localDateToday } from "./date.js";
 import { openDaylyDatabase, type DaylyDatabase } from "./storage/database.js";
 import {
   createDailyHabit,
@@ -13,6 +13,7 @@ const today = localDateToday();
 const menuButton = document.querySelector<HTMLButtonElement>("[data-menu-button]");
 const menu = document.querySelector<HTMLElement>("[data-menu]");
 const menuVersion = document.querySelector<HTMLElement>("[data-menu-version]");
+const dayName = document.querySelector<HTMLElement>("[data-day-name]");
 const updateNotice = document.querySelector<HTMLElement>("[data-update-notice]");
 const dayView = document.querySelector<HTMLElement>("[data-day-view]");
 const habitList = document.querySelector<HTMLElement>("[data-habit-list]");
@@ -25,7 +26,7 @@ const formError = document.querySelector<HTMLElement>("[data-form-error]");
 const storageError = document.querySelector<HTMLElement>("[data-storage-error]");
 
 if (
-  !menuButton || !menu || !menuVersion || !updateNotice || !dayView || !habitList || !emptyState
+  !menuButton || !menu || !menuVersion || !dayName || !updateNotice || !dayView || !habitList || !emptyState
   || !status || !statusCount || !habitFormPage || !habitForm || !formError || !storageError
 ) {
   throw new Error("The application shell is missing required elements.");
@@ -46,6 +47,7 @@ const storageErrorPanel = storageError;
 let database: DaylyDatabase | undefined;
 
 menuVersion.textContent = APP_VERSION;
+dayName.textContent = formatDayName(today);
 
 function showUpdateNotice() {
   updatePanel.hidden = false;
