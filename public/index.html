@@ -20,9 +20,9 @@
           <p class="eyebrow">dayly</p>
           <h1>Today</h1>
         </div>
-        <div class="toolbar-status" aria-label="No habits scheduled">
+        <div class="toolbar-status" data-status aria-label="No habits scheduled">
           <span class="status-ring" aria-hidden="true"></span>
-          <span>0/0</span>
+          <span data-status-count>0/0</span>
         </div>
       </header>
 
@@ -37,10 +37,51 @@
         <button type="button" disabled>Settings</button>
       </nav>
 
-      <section class="empty-state" aria-labelledby="empty-title">
-        <h2 id="empty-title">No habits yet</h2>
-        <p>Your day overview will live here.</p>
-        <button class="primary-button" type="button" disabled>Add habit</button>
+      <section data-day-view aria-labelledby="day-title">
+        <h2 class="visually-hidden" id="day-title">Today&apos;s habits</h2>
+        <div class="habit-list" data-habit-list></div>
+        <section class="empty-state" data-empty-state aria-labelledby="empty-title" hidden>
+          <h2 id="empty-title">No habits yet</h2>
+          <p>Your day overview will live here.</p>
+          <button class="primary-button" data-add-habit type="button">Add habit</button>
+        </section>
+        <button class="add-habit-button" data-add-habit type="button">Add habit</button>
+      </section>
+
+      <section class="habit-form-page" data-habit-form-page hidden aria-labelledby="habit-form-title">
+        <form class="habit-form" data-habit-form>
+          <div class="form-heading">
+            <p class="eyebrow">New habit</p>
+            <h2 id="habit-form-title">Add a habit</h2>
+          </div>
+          <label>
+            Title
+            <input name="title" type="text" maxlength="160" required autocomplete="off" />
+          </label>
+          <label>
+            Notes <span class="field-hint">optional</span>
+            <textarea name="notes" rows="4" maxlength="1000"></textarea>
+          </label>
+          <label>
+            Start date
+            <input name="startDate" type="date" required />
+          </label>
+          <label>
+            End date <span class="field-hint">optional</span>
+            <input name="endDate" type="date" />
+          </label>
+          <p class="schedule-summary">Every day</p>
+          <p class="form-error" data-form-error role="alert" hidden></p>
+          <div class="form-actions">
+            <button class="secondary-button" data-discard-habit type="button">Discard</button>
+            <button class="primary-button" type="submit">Save habit</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="storage-error" data-storage-error role="alert" hidden>
+        <h2>Local storage unavailable</h2>
+        <p>Dayly cannot save data on this device. Check your browser storage settings and reload the app.</p>
       </section>
     </main>
     <script type="module" src="./app.js"></script>

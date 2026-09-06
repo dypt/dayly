@@ -7,10 +7,12 @@
     "build": "node scripts/build.mjs",
     "dev": "http-server dist -p 4173 -c-1",
     "deploy": "node scripts/deploy.mjs",
-    "test": "node --test"
+    "test": "tsx --test src/**/*.test.ts"
   },
   "devDependencies": {
+    "fake-indexeddb": "^6.2.5",
     "http-server": "^14.1.1",
+    "tsx": "^4.23.13",
     "typescript": "^5.9.2"
   },
   "dependencies": {
